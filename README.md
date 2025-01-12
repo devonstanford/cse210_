@@ -1,5 +1,5 @@
 # cse210-student-template
-This is the starter code for students in CSE 210.
+This is some really bad code that may break and make me cry at several points. I'm not sure if it's even legal in some jurisdictions.
 
 This repository contains the starter code for many different projects. They are arranged as follows:
 
