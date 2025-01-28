@@ -5,25 +5,48 @@ class Program
 {
     static void Main(string[] args)
     {
-        Resume resume = new Resume();
+        bool keepRunning = true;
 
-        resume.Name = "Allison Rose";
-        resume.Jobs = new List<Job>();
+        Resume myResume = new Resume();
 
-        Job job1 = new Job();
-        job1.JobTitle = "Software Developer";
-        job1.Company = "Microsoft";
-        job1.StartYear = 2019;
-        job1.EndYear = 2022;
-        resume.Jobs.Add(job1);
+        while (keepRunning)
+        {
+            DisplayMenu();
+            string choice = Console.ReadLine();
 
-        Job job2 = new Job();
-        job2.JobTitle = "Manager";
-        job2.Company = "Apple";
-        job2.StartYear = 2022;
-        job2.EndYear = 2023;
-        resume.Jobs.Add(job2);
+            switch (choice)
+            {
+                case "1":
+                    Job newJob = new Job();
+                    Console.Write("Enter job title: ");
+                    newJob.JobTitle = Console.ReadLine();
+                    Console.Write("Enter company: ");
+                    newJob.Company = Console.ReadLine();
+                    Console.Write("Enter start year: ");
+                    newJob.StartYear = int.Parse(Console.ReadLine());
+                    Console.Write("Enter end year: ");
+                    newJob.EndYear = int.Parse(Console.ReadLine());
+                    myResume.Jobs.Add(newJob);
+                    Console.WriteLine("Job added.");
+                    break;
+                case "2":
+                    myResume.Display();
+                    break;
+                case "3":
+                    keepRunning = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
 
-        resume.Display();
+    static void DisplayMenu()
+    {
+        Console.WriteLine("1. Add new job");
+        Console.WriteLine("2. Display resume");
+        Console.WriteLine("3. Quit");
+        Console.WriteLine();
     }
 }
