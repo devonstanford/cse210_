@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         Prompts myPrompts = new Prompts();
-        Journal myJournal = new Journal("myJournal.txt"); // Create a new Journal object. Delete if ever add loading specific files.
+        Journal myJournal = new Journal();
 
         bool keepRunning = true;
 
@@ -70,6 +70,11 @@ class Program
                     }
                     break;
                 case "3":
+                    Console.Write("Enter the file name to load: ");
+                    string fileName = Console.ReadLine();
+                    myJournal.Load(fileName+".txt");
+                    break;
+                case "4":
                     myJournal.Save();
                     myPrompts.Save();
                     keepRunning = false;
@@ -88,7 +93,8 @@ class Program
         Console.WriteLine("");
         Console.WriteLine("1. Entries");
         Console.WriteLine("2. Prompts");
-        Console.WriteLine("3. Save and Quit");
+        Console.WriteLine("3. Load");
+        Console.WriteLine("4. Save and Quit");
         Console.WriteLine("");
     }
 

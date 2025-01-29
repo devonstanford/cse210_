@@ -6,11 +6,9 @@ class Journal
     public List<Entry> Entries { get; set; }
     public string _filename { get; set; }
 
-    public Journal(string _filename)
+    public Journal()
     {
         Entries = new List<Entry>();
-        this._filename = _filename;
-        Load(_filename);
     }
 
     public void Load(string filename)
@@ -32,8 +30,18 @@ class Journal
 
     public void Save()
     {
+        if (_filename == null || !File.Exists(_filename))
+        {
+            Console.Write("Enter the file name to save: ");
+            _filename = Console.ReadLine()+".txt";
+
+
+        }
+
+        FileStream stream = new FileStream(_filename, FileMode.OpenOrCreate);
+
         Console.WriteLine($"Saving journal to {_filename}...");
-        using (StreamWriter outputFile = new StreamWriter(_filename))
+        using (StreamWriter outputFile = new StreamWriter(stream))
         {
             foreach (Entry entry in Entries)
             {
