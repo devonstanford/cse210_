@@ -5,22 +5,13 @@ using System.Collections.Generic;
 public class Prompts
 {
     public List<string> _promptList { get; set; }
+    public string _filename { get; set; }
 
     public Prompts()
     {
-        _promptList = new List<string>
-        {
-            "Write a story about a dragon.",
-            "Write a story about a princess.",
-            "Write a story about a knight.",
-            "Write a story about a wizard.",
-            "Write a story about a fairy.",
-            "Write a story about a pirate.",
-            "Write a story about a ghost.",
-            "Write a story about a vampire.",
-            "Write a story about a werewolf.",
-            "Write a story about a superhero."
-        };
+        _promptList = new List<string>();
+        _filename = "prompts.txt";
+        Load(_filename);
     }
 
     public string Get()
@@ -70,5 +61,30 @@ public class Prompts
         {
             Console.WriteLine($"{i+1}: {_promptList[i]}");
         }
+    }
+
+    public void Load(string filename)
+    {
+        Console.WriteLine($"Loading prompts from {filename}...");
+        _promptList.Clear();
+        string[] lines = System.IO.File.ReadAllLines(filename);
+        foreach (string line in lines)
+        {
+            _promptList.Add(line);
+        }
+        Console.WriteLine("Prompts loaded.");
+    }
+
+    public void Save()
+    {
+        Console.WriteLine($"Saving prompts to {_filename}...");
+        using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(_filename))
+        {
+            foreach (string prompt in _promptList)
+            {
+                outputFile.WriteLine(prompt);
+            }
+        }
+        Console.WriteLine("Prompts saved.");
     }
 }
