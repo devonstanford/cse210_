@@ -72,8 +72,8 @@ public class Prompts
             _promptList.Add("How did I see the hand of the Lord in my life today?");
             _promptList.Add("What was the strongest emotion I felt today?");
             _promptList.Add("If I had one thing I could do over today, what would it be?");
+            return;
         }
-        FileStream stream = new FileStream(filename, FileMode.OpenOrCreate);
 
         Console.WriteLine($"Loading prompts from {filename}...");
         _promptList.Clear();
@@ -87,8 +87,10 @@ public class Prompts
 
     public void Save()
     {
+        FileStream stream = new FileStream(_filename, FileMode.OpenOrCreate);
+
         Console.WriteLine($"Saving prompts to {_filename}...");
-        using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(_filename))
+        using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(stream))
         {
             foreach (string prompt in _promptList)
             {
