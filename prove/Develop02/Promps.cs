@@ -65,6 +65,16 @@ public class Prompts
 
     public void Load(string filename)
     {
+        if (!System.IO.File.Exists(filename))
+        {
+            _promptList.Add("Who was the most interesting person I interacted with today?");
+            _promptList.Add("What was the best part of my day?");
+            _promptList.Add("How did I see the hand of the Lord in my life today?");
+            _promptList.Add("What was the strongest emotion I felt today?");
+            _promptList.Add("If I had one thing I could do over today, what would it be?");
+        }
+        FileStream stream = new FileStream(filename, FileMode.OpenOrCreate);
+
         Console.WriteLine($"Loading prompts from {filename}...");
         _promptList.Clear();
         string[] lines = System.IO.File.ReadAllLines(filename);
