@@ -61,17 +61,32 @@ class Journal
 
     public void Delete()
     {
+        if (Entries.Count == 0)
+        {
+            Console.WriteLine("There are no entries to delete.");
+            return;
+        }
+
         Console.Write("Enter the entry number you want to delete: ");
-        int entry = int.Parse(Console.ReadLine());
-        Console.WriteLine($"This entry will be deleted:{Entries[entry - 1]._response}.");
+        string entry = Console.ReadLine();
+
+        if (int.TryParse(entry, out int result) == false || result < 1 || result > Entries.Count)
+        {
+            Console.WriteLine("Invalid entry number.");
+            return;
+        }
+        
+        int intEntry = int.Parse(entry);
+
+        Console.WriteLine($"This entry will be deleted:{Entries[intEntry - 1]._response}.");
         Console.Write("Do you want to delete it? (y/n)");
         string delete = Console.ReadLine();
         if (delete == "y")
         {
-            Entries.Remove(Entries[entry - 1]);
+            Entries.Remove(Entries[intEntry - 1]);
             Console.WriteLine("Entry deleted.");
         }
-        if (delete == "n")
+        else
         {
             Console.WriteLine("Entry not deleted.");
         }

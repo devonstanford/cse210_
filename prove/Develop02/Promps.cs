@@ -40,16 +40,30 @@ public class Prompts
 
     public void Delete()
     {
+        if (_promptList.Count == 0)
+        {
+            Console.WriteLine("There are no prompts to delete.");
+            return;
+        }
+
         Console.Write("Enter the prompt number you want to delete: ");
-        int prompt = int.Parse(Console.ReadLine());
-        Console.Write($"Thi prompt will be deleted: {_promptList[prompt-1]}. Do you want to delete it? (y/n)");
+        string prompt = Console.ReadLine();
+
+        if (int.TryParse(prompt, out int result) == false || result < 1 || result > _promptList.Count)
+        {
+            Console.WriteLine("Invalid prompt number.");
+            return;
+        }
+
+        int intPrompt = int.Parse(prompt);
+        Console.Write($"Thi prompt will be deleted: {_promptList[intPrompt-1]}. Do you want to delete it? (y/n)");
         string delete = Console.ReadLine();
         if (delete == "y")
         {
-            _promptList.Remove(_promptList[prompt-1]);
+            _promptList.Remove(_promptList[intPrompt-1]);
             Console.WriteLine("Prompt deleted.");
         }
-        if (delete == "n")
+        else
         {
             Console.WriteLine("Prompt not deleted.");
         }
