@@ -4,28 +4,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        string adjective = GetAdjective();
-        string noun = GetNoun();
+        Person p1 = new Person();
 
-        Console.WriteLine($"I looked out the window and saw a {adjective} {noun}.");
-    }
+        p1.SetName("Jerry");
+        p1.SetAge(23);
 
-    static int Multiply(int number1, int number2)
-    {
-        return number1 * number2;
-    }
+        p1.Display();
 
-    static string GetAdjective()
-    {
-        Console.WriteLine("Enter an adjective:");
-        string adjective = Console.ReadLine();
-        return adjective;
-    }
+        string theName = p1.GetName();
+        Console.WriteLine($"The person's name was: {theName}");
 
-    static string GetNoun()
-    {
-        Console.WriteLine("Enter a noun:");
-        string noun = Console.ReadLine();
-        return noun;
+        Person p2 = new Person("Mary", 18);
+        p2.Display();
     }
 }
